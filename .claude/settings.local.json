@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest *)",
+      "Bash(npm --version)",
+      "Bash(npm config *)",
+      "Bash(npm cache *)",
+      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm)",
+      "Read(//d/Myblog/**)",
+      "Bash(npx --yes create-next-app@latest blog-temp --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm)",
+      "Bash(mkdir -p /d/Myblog/.npm-cache-tmp)",
+      "Bash(npm_config_cache=/d/Myblog/.npm-cache-tmp npx --yes create-next-app@latest XuHang_Blog --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm)",
+      "Bash(rm -rf .npm-cache-tmp)",
+      "Bash(mkdir -p .npm-cache-tmp)",
+      "Bash(npm_config_cache=/d/Myblog/.npm-cache-tmp npx --yes create-next-app@latest blog-temp --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm)",
+      "Bash(rm -rf blog-temp .npm-cache-tmp)",
+      "Bash(npm_config_cache=/d/Myblog/.npm-cache-tmp npm_config_registry=https://registry.npmmirror.com npx --yes create-next-app@latest blog-temp --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm)",
+      "Bash(grep -v \".git$\")",
+      "Bash(xargs rm *)",
+      "Bash(cp -r /d/Myblog/blog-temp/src/* /d/Myblog/XuHang_Blog/src/)",
+      "Bash(cp -r /d/Myblog/blog-temp/public/* /d/Myblog/XuHang_Blog/public/)",
+      "Bash(rm -rf /d/Myblog/blog-temp /d/Myblog/.npm-cache-tmp)",
+      "Bash(npm install *)",
+      "Bash(npm_config_registry=https://registry.npmmirror.com npm audit fix)",
+      "Bash(npm_config_registry=https://registry.npmmirror.com npm run build)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}
