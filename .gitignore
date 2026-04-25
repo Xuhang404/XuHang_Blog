@@ -42,3 +42,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# npmcache
+.npm-cache
+
+# auto-generated data
+data/views.json
