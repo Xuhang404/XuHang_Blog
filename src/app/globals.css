@@ -7,5 +7,15 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* 文章正文排版放大 */
+.prose {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
 /* hide next.js devtools panel */
 nextjs-portal { display: none !important; }

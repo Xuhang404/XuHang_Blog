@@ -1,4 +1,6 @@
 import Link from "next/link";
+import AdminSidebar from "@/components/AdminSidebar";
+import LogoutButton from "@/components/LogoutButton";
 
 export default function AdminLayout({
   children,
@@ -15,10 +17,16 @@ export default function AdminLayout({
           >
             &larr; 返回博客
           </Link>
-          <span className="text-sm text-zinc-400">后台</span>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-zinc-400">后台</span>
+            <LogoutButton />
+          </div>
         </div>
       </header>
-      {children}
+      <div className="mx-auto flex max-w-5xl gap-8 px-4 py-8">
+        <AdminSidebar />
+        <main className="min-w-0 flex-1">{children}</main>
+      </div>
     </div>
   );
 }

@@ -17,17 +17,19 @@ export type Post = {
   content: string;
 };
 
-export function getAllPosts(): Omit<Post, "content">[] {
+export function getAllPosts(): (Omit<Post, "content"> & { readingTime: number })[] {
   const fileNames = fs.readdirSync(postsDirectory);
   return fileNames
     .filter((fn) => fn.endsWith(".md"))
     .map((fn) => {
       const slug = fn.replace(/\.md$/, "");
       const source = fs.readFileSync(path.join(postsDirectory, fn), "utf-8");
-      const { data } = matter(source);
+      const { data, content } = matter(source);
+      const charCount = content.replace(/\s/g, "").length;
       return {
         slug,
         metadata: data as PostMetadata,
+        readingTime: Math.max(1, Math.ceil(charCount / 350)),
       };
     })
     .sort(

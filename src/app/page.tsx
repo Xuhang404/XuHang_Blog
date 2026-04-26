@@ -4,10 +4,25 @@ import { getProfile } from "@/lib/profile";
 import PostViews from "@/components/PostViews";
 import AdminBar from "@/components/AdminBar";
 import AdminButton from "@/components/AdminButton";
+import TagBadge from "@/components/TagBadge";
 
 export default function Home() {
   const posts = getAllPosts();
   const profile = getProfile();
+
+  function relativeTime(dateStr: string): string {
+    const diff = Date.now() - new Date(dateStr).getTime();
+    const min = Math.floor(diff / 60000);
+    if (min < 1) return "刚刚";
+    if (min < 60) return `${min} 分钟前`;
+    const hour = Math.floor(diff / 3600000);
+    if (hour < 24) return `${hour} 小时前`;
+    const day = Math.floor(diff / 86400000);
+    if (day < 30) return `${day} 天前`;
+    const month = Math.floor(day / 30);
+    if (month < 12) return `${month} 个月前`;
+    return `${Math.floor(month / 12)} 年前`;
+  }
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-16">
@@ -40,7 +55,7 @@ export default function Home() {
       </section>
 
       {/* posts */}
-      <div className="space-y-5">
+      <div className="space-y-6">
         {posts.length === 0 && (
           <div className="rounded-xl border border-dashed border-zinc-300 dark:border-zinc-700 py-16 text-center">
             <p className="text-sm text-zinc-400 mb-4">还没有文章</p>
@@ -50,9 +65,9 @@ export default function Home() {
         {posts.map((post) => (
           <article
             key={post.slug}
-            className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#1a1a1a] p-5 transition-colors hover:border-zinc-300 dark:hover:border-zinc-700"
+            className="group rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#1a1a1a] p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md dark:hover:shadow-zinc-900/50"
           >
-            <Link href={`/posts/${post.slug}`} className="group block">
+            <Link href={`/posts/${post.slug}`} className="block">
               <h2 className="text-base font-semibold leading-relaxed group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">
                 {post.metadata.title}
               </h2>
@@ -61,10 +76,10 @@ export default function Home() {
               </p>
             </Link>
             <div className="mt-3 flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800 pt-3">
-              <div className="flex items-center gap-3 text-xs text-zinc-400">
-                <time>{post.metadata.date}</time>
+              <div className="flex flex-wrap items-center gap-2 text-xs text-zinc-400">
+                <span>{relativeTime(post.metadata.date)}</span>
                 {post.metadata.tags?.slice(0, 2).map((tag) => (
-                  <span key={tag}>{tag}</span>
+                  <TagBadge key={tag} tag={tag} />
                 ))}
               </div>
               <div className="flex items-center gap-3">

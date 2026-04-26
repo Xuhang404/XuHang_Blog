@@ -3,29 +3,39 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function AdminProfile() {
+export default function AdminAbout() {
   const router = useRouter();
-  const [name, setName] = useState("");
-  const [bio, setBio] = useState("");
-  const [avatar, setAvatar] = useState("");
+  const [intro, setIntro] = useState("");
+  const [introMore, setIntroMore] = useState("");
+  const [skillsText, setSkillsText] = useState("");
+  const [github, setGithub] = useState("");
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    fetch("/api/profile")
+    fetch("/api/about")
       .then((r) => r.json())
       .then((data) => {
-        setName(data.name);
-        setBio(data.bio);
-        setAvatar(data.avatar);
+        setIntro(data.intro);
+        setIntroMore(data.introMore);
+        setSkillsText(data.skills?.join(", ") ?? "");
+        setGithub(data.github);
       });
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
-    await fetch("/api/profile", {
+    await fetch("/api/about", {
       method: "PUT",
-      body: JSON.stringify({ name, bio, avatar }),
+      body: JSON.stringify({
+        intro,
+        introMore,
+        skills: skillsText
+          .split(/[,，、]/)
+          .map((s) => s.trim())
+          .filter(Boolean),
+        github,
+      }),
     });
     setSaving(false);
     router.push("/admin");
@@ -34,36 +44,41 @@ export default function AdminProfile() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-8">编辑个人信息</h1>
+      <h1 className="text-2xl font-bold mb-8">编辑关于页</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm text-zinc-500 mb-1">头像 URL</label>
-          <input
-            value={avatar}
-            onChange={(e) => setAvatar(e.target.value)}
-            className="w-full rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
-          />
-          {avatar && (
-            <img
-              src={avatar}
-              alt="preview"
-              className="size-12 rounded-full mt-2"
-            />
-          )}
-        </div>
-        <div>
-          <label className="block text-sm text-zinc-500 mb-1">名称</label>
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+          <label className="block text-sm text-zinc-500 mb-1">个人简介</label>
+          <textarea
+            value={intro}
+            onChange={(e) => setIntro(e.target.value)}
+            rows={3}
             className="w-full rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
           />
         </div>
         <div>
-          <label className="block text-sm text-zinc-500 mb-1">签名</label>
+          <label className="block text-sm text-zinc-500 mb-1">补充介绍</label>
+          <textarea
+            value={introMore}
+            onChange={(e) => setIntroMore(e.target.value)}
+            rows={2}
+            className="w-full rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm text-zinc-500 mb-1">
+            技能（用逗号分隔）
+          </label>
           <input
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
+            value={skillsText}
+            onChange={(e) => setSkillsText(e.target.value)}
+            className="w-full rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm text-zinc-500 mb-1">GitHub 链接</label>
+          <input
+            value={github}
+            onChange={(e) => setGithub(e.target.value)}
             className="w-full rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
           />
         </div>

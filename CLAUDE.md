@@ -2,91 +2,85 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
-
-XuHang 的个人博客，基于 Next.js 16 (App Router) + TypeScript + Tailwind CSS v4。
-
 ## Commands
 
 ```bash
-npm run dev      # 启动开发服务器 → http://localhost:3000
-npm run build    # 生产构建（Turbopack）
-npm run start    # 启动生产服务器
-npm run lint     # ESLint 代码检查
+npm run dev      # Start dev server at http://localhost:3000
+npm run build    # Production build
+npm run start    # Start production server
+npm run lint     # ESLint (flat config via eslint.config.mjs)
 ```
 
-## Tech Stack
+No test framework is configured.
 
-- **Next.js 16** — App Router, Turbopack, React 19
-- **TypeScript** — strict mode, `@/*` path alias → `src/*`
-- **Tailwind CSS v4** — 自定义 dark 模式（class 切换）
-- **ESLint** — flat config (`eslint.config.mjs`)，集成 `eslint-config-next`
-- **npm** — registry 已配置为 `registry.npmmirror.com`，cache 在项目本地 `.npm-cache`
+## Project Architecture
 
-## Project Structure
+Personal blog built with **Next.js 16** (App Router), **TypeScript**, **Tailwind CSS v4**, **React 19**. Content is stored as Markdown files on the filesystem — no database.
 
-```
-content/posts/           # Markdown 文章（gray-matter frontmatter）
-data/
-  profile.json           # 个人信息（名称、签名、头像）
-  views.json             # 文章浏览量（自动生成，不提交 git）
-src/
-  app/
-    globals.css          # Tailwind + 暗色模式
-    layout.tsx           # 根布局（Header + Footer）
-    page.tsx             # 首页（头像 + 签名 + 文章列表 + 阅读量）
-    about/
-      page.tsx           # 关于页面
-    posts/[slug]/
-      page.tsx           # 文章详情（Markdown 渲染 + 阅读量）
-    admin/               # 后台管理（需登录）
-      page.tsx           # 文章管理 + 个人信息入口
-      login/page.tsx
-      profile/page.tsx   # 编辑个人信息
-      posts/
-        new/page.tsx     # 新建文章
-        [slug]/edit/     # 编辑文章
-    api/
-      posts/             # 文章 CRUD（认证）
-      auth/              # 登录/登出/校验
-      profile/           # 个人信息读写
-      views/             # 浏览量增查
-  components/
-    Header.tsx           # 导航 + 暗色模式切换
-    Footer.tsx           # 页脚
-    PostEditor.tsx       # Markdown 编辑器（分栏 + 实时预览）
-    PostViews.tsx        # 浏览量显示组件
-    AdminBar.tsx         # 编辑/删除按钮（登录后可见）
-    ThemeToggle.tsx      # 暗色模式切换按钮
-  lib/
-    posts.ts             # 文章 CRUD（gray-matter）
-    auth.ts              # 密码认证
-    profile.ts           # 个人信息读写
-    views.ts             # 浏览量持久化
-  middleware.ts          # 保护 /admin 路由
-.env.local               # ADMIN_PASSWORD
-```
+### Data Layer (src/lib/)
 
-## Admin
+- **`posts.ts`** — CRUD for Markdown blog posts in `content/posts/`. Uses `gray-matter` for YAML frontmatter parsing. Each post has: slug, title, date, excerpt, tags, content body.
+- **`auth.ts`** — Password auth via SHA-256. Password from `ADMIN_PASSWORD` env var (in `.env.local`). Token stored as httpOnly cookie named `admin_token`.
+- **`profile.ts`** — Read/write author profile from `data/profile.json`.
+- **`views.ts`** — Read/write per-post view counters from `data/views.json`.
 
-后台路径 `/admin`，密码在 `.env.local` 中设置。
+### Route Structure
 
-```env
-ADMIN_PASSWORD=admin123
-```
+| Route | Description |
+|---|---|
+| `/` | Homepage — profile card + post list with view counts |
+| `/about` | Static about page |
+| `/posts/[slug]` | Single post rendered from Markdown via `react-markdown` + `remark-gfm` |
+| `/admin/login` | Password login form |
+| `/admin` | Dashboard listing all posts |
+| `/admin/posts/new` | Create post (PostEditor with live Markdown preview) |
+| `/admin/posts/[slug]/edit` | Edit post |
+| `/admin/profile` | Edit profile (name, bio, avatar) |
 
-功能：
-- 密码登录（cookie session，7 天有效）
-- 文章列表 / 新建 / 编辑 / 删除
-- Markdown 编辑器 + 实时预览
-- 个人信息编辑（名称、签名、头像）
-- 首页直接显示编辑/删除按钮（登录后可见）
-- 文章浏览量统计
+### API Routes
 
-> 修改内容后重新 `npm run build` 才会更新 SSG 页面。dev 模式刷新即可。
+| Route | Auth Required | Methods |
+|---|---|---|
+| `/api/auth/login` | No | POST — validate password, set cookie |
+| `/api/auth/logout` | No | POST — clear cookie |
+| `/api/auth/check` | No | GET — verify token |
+| `/api/posts` | POST only | GET (list all), POST (create) |
+| `/api/posts/[slug]` | PUT/DELETE only | GET, PUT, DELETE |
+| `/api/profile` | PUT only | GET, PUT |
+| `/api/views/[slug]` | No | GET (get count), POST (increment) |
 
-## Notes
+### Auth Flow
 
-- npm registry 已配置为 npmmirror.com 镜像
-- `.npm-cache/`、`.env.local`、`data/views.json` 不提交 git
-- 暗色模式基于 class 切换（`<html class="dark">`），选择保存在 localStorage
+- `ADMIN_PASSWORD` in `.env.local` — SHA-256 hashed and stored as `admin_token` cookie.
+- `middleware.ts` guards all `/admin/*` routes (except `/admin/login`), redirects to login if no token.
+- Client components (`AdminButton`, `AdminBar`) check auth via `/api/auth/check`.
+
+### Key Client Components (all "use client")
+
+- `PostEditor.tsx` — Markdown editor with live preview (for admin post create/edit)
+- `ThemeToggle.tsx` — Dark/light mode toggle, persisted in localStorage via `.dark` class on `<html>`
+- `AdminBar.tsx` — Edit/delete buttons visible when authenticated on post pages
+- `AdminButton.tsx` — Auth-gated nav button to admin panel
+- `PostViews.tsx` — View counter display
+
+### Styling
+
+- Tailwind CSS v4 with `@tailwindcss/typography` plugin (prose classes for rendered Markdown).
+- Dark mode via `.dark` class on `<html>`, toggled by `ThemeToggle`, persisted in localStorage.
+- Inline script in root layout prevents flash-of-light-theme on dark-mode load.
+
+### Path Alias
+
+`@/*` maps to `./src/*` (e. g., `@/lib/posts`, `@/components/Header`).
+
+## 语言要求
+
+- 所有对话使用中文。
+- 所有文档使用中文。
+- 所有代码注释使用中文。
+
+## 执行要求
+
+- 在生成说明、总结、计划、提交说明时，统一使用中文。
+- 在新增或修改 Markdown 文档时，统一使用中文。
+- 在新增或修改代码注释时，统一使用中文

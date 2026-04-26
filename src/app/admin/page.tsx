@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 type PostSummary = {
@@ -11,7 +10,6 @@ type PostSummary = {
 
 export default function AdminDashboard() {
   const [posts, setPosts] = useState<PostSummary[]>([]);
-  const router = useRouter();
 
   useEffect(() => {
     fetch("/api/posts")
@@ -25,38 +23,22 @@ export default function AdminDashboard() {
     setPosts((prev) => prev.filter((p) => p.slug !== slug));
   };
 
-  const handleLogout = async () => {
-    await fetch("/api/auth/logout", { method: "POST" });
-    router.push("/admin/login");
-  };
-
   return (
-    <div className="mx-auto max-w-4xl px-4 py-12">
-      <div className="flex items-center justify-between mb-8">
+    <>
+      <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">文章</h1>
-        <div className="flex gap-3">
-          <Link
-            href="/admin/posts/new"
-            className="rounded bg-zinc-900 dark:bg-zinc-100 text-white dark:text-black px-4 py-2 text-sm font-medium hover:opacity-90"
-          >
-            写新文章
-          </Link>
-          <Link
-            href="/admin/profile"
-            className="rounded border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
-          >
-            个人信息
-          </Link>
-          <button
-            onClick={handleLogout}
-            className="rounded border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
-          >
-            退出
-          </button>
-        </div>
+        <Link
+          href="/admin/posts/new"
+          className="rounded bg-zinc-900 dark:bg-zinc-100 text-white dark:text-black px-4 py-2 text-sm font-medium hover:opacity-90"
+        >
+          写新文章
+        </Link>
       </div>
 
       <div className="space-y-3">
+        {posts.length === 0 && (
+          <p className="text-sm text-zinc-400 text-center py-12">暂无文章</p>
+        )}
         {posts.map((post) => (
           <div
             key={post.slug}
@@ -89,6 +71,6 @@ export default function AdminDashboard() {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 }

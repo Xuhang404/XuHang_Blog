@@ -8,7 +8,7 @@ export default async function EditPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = getPost(decodeURIComponent(slug));
   if (!post) notFound();
 
   return (

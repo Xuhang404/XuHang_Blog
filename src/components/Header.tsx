@@ -3,7 +3,7 @@ import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   return (
-    <header className="border-b border-zinc-200 dark:border-zinc-800">
+    <header className="sticky top-0 z-50 border-b border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-[#121212]/80 backdrop-blur-md">
       <div className="mx-auto max-w-3xl flex items-center justify-between px-4 py-6">
         <Link href="/" className="text-xl font-bold tracking-tight">
           XuHang&apos;s Blog
