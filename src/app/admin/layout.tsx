@@ -8,17 +8,17 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
-      <header className="border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-[#1a1a1a]">
+    <div className="min-h-screen bg-warm-50 dark:bg-warm-950">
+      <header className="border-b border-warm-200 dark:border-warm-800 bg-white dark:bg-warm-900">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
           <Link
             href="/"
-            className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+            className="text-sm text-warm-400 hover:text-accent transition-colors duration-300"
           >
             &larr; 返回博客
           </Link>
           <div className="flex items-center gap-4">
-            <span className="text-sm text-zinc-400">后台</span>
+            <span className="text-sm text-warm-400">后台</span>
             <LogoutButton />
           </div>
         </div>

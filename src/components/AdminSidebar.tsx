@@ -24,10 +24,10 @@ export default function AdminSidebar() {
           <Link
             key={link.href}
             href={link.href}
-            className={`block rounded-md px-3 py-2 text-sm transition-colors ${
+            className={`block rounded-lg px-3 py-2 text-sm transition-all duration-300 ${
               active
-                ? "bg-zinc-200 dark:bg-zinc-800 font-medium text-zinc-900 dark:text-zinc-100"
-                : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/50"
+                ? "bg-accent text-white font-medium shadow-sm shadow-accent/30"
+                : "text-warm-500 dark:text-warm-400 hover:text-accent dark:hover:text-accent hover:bg-warm-100 dark:hover:bg-warm-800/50"
             }`}
           >
             {link.label}

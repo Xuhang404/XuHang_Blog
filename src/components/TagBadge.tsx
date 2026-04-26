@@ -1,10 +1,10 @@
-const COLORS = [
-  { bg: "bg-blue-100 dark:bg-blue-900/30", text: "text-blue-700 dark:text-blue-300" },
-  { bg: "bg-green-100 dark:bg-green-900/30", text: "text-green-700 dark:text-green-300" },
-  { bg: "bg-amber-100 dark:bg-amber-900/30", text: "text-amber-700 dark:text-amber-300" },
-  { bg: "bg-purple-100 dark:bg-purple-900/30", text: "text-purple-700 dark:text-purple-300" },
-  { bg: "bg-pink-100 dark:bg-pink-900/30", text: "text-pink-700 dark:text-pink-300" },
-  { bg: "bg-cyan-100 dark:bg-cyan-900/30", text: "text-cyan-700 dark:text-cyan-300" },
+const schemes = [
+  { bg: "bg-amber-50 dark:bg-amber-900/25", text: "text-amber-700 dark:text-amber-300" },
+  { bg: "bg-emerald-50 dark:bg-emerald-900/25", text: "text-emerald-700 dark:text-emerald-300" },
+  { bg: "bg-rose-50 dark:bg-rose-900/25", text: "text-rose-700 dark:text-rose-300" },
+  { bg: "bg-teal-50 dark:bg-teal-900/25", text: "text-teal-700 dark:text-teal-300" },
+  { bg: "bg-orange-50 dark:bg-orange-900/25", text: "text-orange-700 dark:text-orange-300" },
+  { bg: "bg-stone-100 dark:bg-stone-800/30", text: "text-stone-600 dark:text-stone-300" },
 ];
 
 function hashTag(tag: string) {
@@ -16,10 +16,10 @@ function hashTag(tag: string) {
 }
 
 export default function TagBadge({ tag }: { tag: string }) {
-  const color = COLORS[hashTag(tag) % COLORS.length];
+  const { bg, text } = schemes[hashTag(tag) % schemes.length];
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${color.bg} ${color.text}`}
+      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${bg} ${text}`}
     >
       {tag}
     </span>

@@ -32,7 +32,7 @@ export default function AdminBar({ editSlug, deleteSlug }: Props) {
       {editSlug && (
         <button
           onClick={() => doAction("edit", editSlug)}
-          className="rounded border border-zinc-200 dark:border-zinc-700 px-2 py-0.5 text-xs text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
+          className="rounded-lg border border-warm-200 dark:border-warm-700 px-2 py-0.5 text-xs text-warm-400 hover:text-accent hover:border-accent dark:hover:border-accent transition-all duration-300"
         >
           编辑
         </button>
@@ -40,7 +40,7 @@ export default function AdminBar({ editSlug, deleteSlug }: Props) {
       {deleteSlug && (
         <button
           onClick={() => doAction("delete", deleteSlug)}
-          className="rounded border border-zinc-200 dark:border-zinc-700 px-2 py-0.5 text-xs text-zinc-400 hover:text-red-500 hover:border-red-300 dark:hover:border-red-700 transition-colors"
+          className="rounded-lg border border-warm-200 dark:border-warm-700 px-2 py-0.5 text-xs text-warm-400 hover:text-rose-500 hover:border-rose-300 dark:hover:border-rose-700 transition-all duration-300"
         >
           删除
         </button>

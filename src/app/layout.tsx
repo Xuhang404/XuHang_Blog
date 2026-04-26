@@ -28,7 +28,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="flex min-h-full flex-col bg-white dark:bg-[#121212] text-zinc-900 dark:text-zinc-100">
+      <body className="flex min-h-full flex-col bg-warm-50 dark:bg-warm-950 text-warm-800 dark:text-warm-100">
         <Header />
         <main className="flex-1">{children}</main>
       </body>

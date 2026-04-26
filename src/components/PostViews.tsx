@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 type Props = {
   slug: string;
-  count?: boolean; // true = increment view on mount (for detail page)
+  count?: boolean;
 };
 
 export default function PostViews({ slug, count }: Props) {
@@ -20,5 +20,5 @@ export default function PostViews({ slug, count }: Props) {
 
   if (views === null) return null;
 
-  return <span className="text-xs text-zinc-400">{views} 次阅读</span>;
+  return <span className="text-xs text-warm-400 dark:text-warm-500">{views} 次阅读</span>;
 }

@@ -34,51 +34,53 @@ export default function AdminProfile() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-8">编辑个人信息</h1>
+      <h1 className="text-2xl font-bold text-warm-800 dark:text-warm-100 mb-8">
+        编辑个人信息
+      </h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm text-zinc-500 mb-1">头像 URL</label>
+          <label className="block text-sm text-warm-500 mb-1">头像 URL</label>
           <input
             value={avatar}
             onChange={(e) => setAvatar(e.target.value)}
-            className="w-full rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
+            className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
           />
           {avatar && (
             <img
               src={avatar}
               alt="preview"
-              className="size-12 rounded-full mt-2"
+              className="size-12 rounded-full mt-2 ring-2 ring-warm-200 dark:ring-warm-700"
             />
           )}
         </div>
         <div>
-          <label className="block text-sm text-zinc-500 mb-1">名称</label>
+          <label className="block text-sm text-warm-500 mb-1">名称</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
+            className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
           />
         </div>
         <div>
-          <label className="block text-sm text-zinc-500 mb-1">签名</label>
+          <label className="block text-sm text-warm-500 mb-1">签名</label>
           <input
             value={bio}
             onChange={(e) => setBio(e.target.value)}
-            className="w-full rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
+            className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
           />
         </div>
         <div className="flex gap-3 pt-2">
           <button
             type="submit"
             disabled={saving}
-            className="rounded bg-zinc-900 dark:bg-zinc-100 text-white dark:text-black px-4 py-2 text-sm font-medium hover:opacity-90 disabled:opacity-50"
+            className="rounded-xl bg-accent text-white px-4 py-2 text-sm font-medium hover:bg-accent-dark transition-all duration-300 disabled:opacity-50"
           >
             {saving ? "保存中..." : "保存"}
           </button>
           <button
             type="button"
             onClick={() => router.push("/admin")}
-            className="rounded border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
+            className="rounded-xl border border-warm-200 dark:border-warm-700 px-4 py-2 text-sm text-warm-500 dark:text-warm-400 hover:bg-warm-100 dark:hover:bg-warm-800 transition-all duration-300"
           >
             取消
           </button>

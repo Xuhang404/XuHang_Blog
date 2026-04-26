@@ -16,13 +16,13 @@ export default function TagCloud({ activeTag }: { activeTag?: string }) {
   const tags = Array.from(counts.entries()).sort((a, b) => b[1] - a[1]);
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-1.5">
       <Link
         href="/"
-        className={`rounded-full px-2.5 py-1 text-[11px] transition-all ${
+        className={`rounded-full px-2.5 py-1 text-[11px] font-medium transition-all duration-300 ${
           !activeTag
-            ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-black font-medium"
-            : "bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+            ? "bg-accent text-white shadow-sm shadow-accent/30"
+            : "bg-warm-100 dark:bg-warm-800 text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-700"
         }`}
       >
         全部
@@ -30,16 +30,16 @@ export default function TagCloud({ activeTag }: { activeTag?: string }) {
       {tags.map(([tag, count]) => {
         const ratio = count / maxCount;
         const size =
-          ratio >= 0.8 ? "text-sm" : ratio >= 0.4 ? "text-xs" : "text-[11px]";
+          ratio >= 0.8 ? "text-xs" : ratio >= 0.4 ? "text-[11px]" : "text-[10px]";
         const active = activeTag === tag;
         return (
           <Link
             key={tag}
             href={`/?tag=${encodeURIComponent(tag)}`}
-            className={`${size} rounded-full px-2.5 py-1 transition-all ${
+            className={`${size} rounded-full px-2.5 py-1 font-medium transition-all duration-300 ${
               active
-                ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-black font-medium"
-                : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100"
+                ? "bg-accent text-white shadow-sm shadow-accent/30"
+                : "bg-warm-100 dark:bg-warm-800 text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-700 hover:text-accent dark:hover:text-accent"
             }`}
           >
             {tag}

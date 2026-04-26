@@ -85,21 +85,21 @@ export default function PostEditor({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">
+        <h1 className="text-2xl font-bold text-warm-800 dark:text-warm-100">
           {isEditing ? "编辑文章" : "写新文章"}
         </h1>
         <div className="flex gap-3">
           <button
             type="button"
             onClick={() => router.push("/admin")}
-            className="rounded border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
+            className="rounded-xl border border-warm-200 dark:border-warm-700 px-4 py-2 text-sm text-warm-500 dark:text-warm-400 hover:bg-warm-100 dark:hover:bg-warm-800 transition-all duration-300"
           >
             取消
           </button>
           <button
             type="submit"
             disabled={saving}
-            className="rounded bg-zinc-900 dark:bg-zinc-100 text-white dark:text-black px-4 py-2 text-sm font-medium hover:opacity-90 disabled:opacity-50"
+            className="rounded-xl bg-accent text-white px-4 py-2 text-sm font-medium hover:bg-accent-dark transition-all duration-300 disabled:opacity-50"
           >
             {saving ? "保存中..." : "保存"}
           </button>
@@ -107,7 +107,7 @@ export default function PostEditor({
       </div>
 
       {error && (
-        <p className="text-sm text-red-500">{error}</p>
+        <p className="text-sm text-rose-500">{error}</p>
       )}
 
       <div className="grid grid-cols-2 gap-4">
@@ -119,10 +119,10 @@ export default function PostEditor({
               setSlug(e.target.value);
               setSlugManuallyEdited(true);
             }}
-            className="w-full rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
+            className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
             disabled={isEditing}
           />
-          <p className="mt-1 text-xs text-zinc-400">
+          <p className="mt-1 text-xs text-warm-400">
             文章访问地址 /posts/{slug || "..."}，由标题自动生成
           </p>
         </div>
@@ -130,7 +130,7 @@ export default function PostEditor({
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
+          className="rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
           required
         />
       </div>
@@ -139,7 +139,7 @@ export default function PostEditor({
         placeholder="文章标题"
         value={title}
         onChange={(e) => handleTitleChange(e.target.value)}
-        className="w-full rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
+        className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
         required
       />
 
@@ -147,7 +147,7 @@ export default function PostEditor({
         placeholder="标签（用逗号分隔）"
         value={tags}
         onChange={(e) => setTags(e.target.value)}
-        className="w-full rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
+        className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
       />
 
       <textarea
@@ -155,24 +155,24 @@ export default function PostEditor({
         value={excerpt}
         onChange={(e) => setExcerpt(e.target.value)}
         rows={2}
-        className="w-full rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
+        className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
         required
       />
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs text-zinc-500 mb-1">Markdown</label>
+          <label className="block text-xs text-warm-500 mb-1">Markdown</label>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows={20}
-            className="w-full rounded border border-zinc-300 dark:border-zinc-700 bg-transparent px-3 py-2 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-zinc-500"
+            className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 font-mono text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
             required
           />
         </div>
         <div>
-          <label className="block text-xs text-zinc-500 mb-1">预览</label>
-          <div className="prose prose-zinc dark:prose-invert max-w-none rounded border border-zinc-200 dark:border-zinc-800 px-3 py-2 text-sm overflow-y-auto h-[482px]">
+          <label className="block text-xs text-warm-500 mb-1">预览</label>
+          <div className="prose max-w-none rounded-xl border border-warm-200 dark:border-warm-800 bg-white dark:bg-warm-900 px-3 py-2 text-sm overflow-y-auto h-[482px]">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {content || "*暂无内容*"}
             </ReactMarkdown>
