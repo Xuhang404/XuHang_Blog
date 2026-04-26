@@ -19,3 +19,26 @@ html {
 
 /* hide next.js devtools panel */
 nextjs-portal { display: none !important; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out both;
+}
+
+/* 主题切换过渡 — 只在切换时生效，不影响页面加载性能 */
+html.color-transition,
+html.color-transition *,
+html.color-transition *::before,
+html.color-transition *::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
