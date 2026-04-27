@@ -14,7 +14,7 @@ export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <nav className="w-48 shrink-0 space-y-1">
+    <nav className="w-48 shrink-0 space-y-0.5">
       {links.map((link) => {
         const active =
           link.href === "/admin"
@@ -24,10 +24,10 @@ export default function AdminSidebar() {
           <Link
             key={link.href}
             href={link.href}
-            className={`block rounded-lg px-3 py-2 text-sm transition-all duration-300 ${
+            className={`block px-3 py-2 text-sm transition-all duration-200 ${
               active
-                ? "bg-accent text-white font-medium shadow-sm shadow-accent/30"
-                : "text-warm-500 dark:text-warm-400 hover:text-accent dark:hover:text-accent hover:bg-warm-100 dark:hover:bg-warm-800/50"
+                ? "bg-ink dark:bg-[#f0eee8] text-paper dark:text-[#0f0f0e] font-medium"
+                : "text-smoke dark:text-[#6b6560] hover:text-ink dark:hover:text-[#f0eee8] hover:bg-frost dark:hover:bg-[#1a1916]"
             }`}
           >
             {link.label}

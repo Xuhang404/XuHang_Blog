@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -28,9 +29,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="flex min-h-full flex-col bg-warm-50 dark:bg-warm-950 text-warm-800 dark:text-warm-100">
+      <body className="flex min-h-full flex-col bg-paper dark:bg-[#0f0f0e] text-ink-light dark:text-[#a8a59a]">
         <Header />
         <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );

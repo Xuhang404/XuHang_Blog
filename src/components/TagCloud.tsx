@@ -19,10 +19,10 @@ export default function TagCloud({ activeTag }: { activeTag?: string }) {
     <div className="flex flex-wrap gap-1.5">
       <Link
         href="/"
-        className={`rounded-full px-2.5 py-1 text-[11px] font-medium transition-all duration-300 ${
+        className={`rounded-full px-2.5 py-1 text-[11px] transition-all duration-200 ${
           !activeTag
-            ? "bg-accent text-white shadow-sm shadow-accent/30"
-            : "bg-warm-100 dark:bg-warm-800 text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-700"
+            ? "bg-ink dark:bg-[#f0eee8] text-paper dark:text-[#0f0f0e]"
+            : "text-smoke dark:text-[#6b6560] hover:text-vermillion dark:hover:text-vermillion-light hover:bg-frost dark:hover:bg-[#1a1916]"
         }`}
       >
         全部
@@ -30,16 +30,20 @@ export default function TagCloud({ activeTag }: { activeTag?: string }) {
       {tags.map(([tag, count]) => {
         const ratio = count / maxCount;
         const size =
-          ratio >= 0.8 ? "text-xs" : ratio >= 0.4 ? "text-[11px]" : "text-[10px]";
+          ratio >= 0.8
+            ? "text-xs"
+            : ratio >= 0.4
+              ? "text-[11px]"
+              : "text-[10px]";
         const active = activeTag === tag;
         return (
           <Link
             key={tag}
             href={`/?tag=${encodeURIComponent(tag)}`}
-            className={`${size} rounded-full px-2.5 py-1 font-medium transition-all duration-300 ${
+            className={`${size} rounded-full px-2.5 py-1 transition-all duration-200 ${
               active
-                ? "bg-accent text-white shadow-sm shadow-accent/30"
-                : "bg-warm-100 dark:bg-warm-800 text-warm-600 dark:text-warm-400 hover:bg-warm-200 dark:hover:bg-warm-700 hover:text-accent dark:hover:text-accent"
+                ? "bg-vermillion text-white"
+                : "text-smoke dark:text-[#6b6560] hover:text-vermillion dark:hover:text-vermillion-light hover:bg-frost dark:hover:bg-[#1a1916]"
             }`}
           >
             {tag}

@@ -6,7 +6,6 @@ import { getAllPosts, getPost } from "@/lib/posts";
 import PostViews from "@/components/PostViews";
 import AdminBar from "@/components/AdminBar";
 import ReadingProgress from "@/components/ReadingProgress";
-import TagBadge from "@/components/TagBadge";
 import TableOfContents from "@/components/TableOfContents";
 import BackToTop from "@/components/BackToTop";
 
@@ -38,32 +37,40 @@ export default async function PostPage({
   return (
     <>
       <ReadingProgress />
-      <div className="mx-auto max-w-6xl px-4 py-12 lg:flex lg:gap-12">
-        <article className="min-w-0 flex-1">
-          <div className="mb-8 flex items-center justify-between">
-            <Link
-              href="/"
-              className="text-sm text-warm-400 dark:text-warm-500 hover:text-accent transition-colors duration-300"
-            >
-              &larr; 返回首页
-            </Link>
-            <AdminBar editSlug={slug} deleteSlug={slug} />
-          </div>
+      <div className="mx-auto max-w-6xl px-4 py-16 lg:flex lg:gap-16">
+        <article className="min-w-0 flex-1 max-w-3xl">
+          <Link
+            href="/"
+            className="inline-block text-sm text-smoke/60 dark:text-[#6b6560]/60 hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200 mb-10"
+          >
+            &larr; 返回首页
+          </Link>
 
-          <header className="mb-10">
-            <h1 className="text-3xl font-bold tracking-tight text-warm-800 dark:text-warm-100">
+          <header className="mb-12">
+            <h1 className="font-serif-heading text-[clamp(2rem,4vw,3rem)] leading-tight text-ink dark:text-[#f0eee8]">
               {post.metadata.title}
             </h1>
-            <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-warm-400 dark:text-warm-500">
+            <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-smoke dark:text-[#6b6560]">
               <time>{post.metadata.date}</time>
-              <span className="text-warm-200 dark:text-warm-700">·</span>
+              <span className="text-divider dark:text-[#2a2822]">&middot;</span>
               <span>{readingTime > 1 ? `${readingTime} 分钟阅读` : "不到 1 分钟"}</span>
-              <span className="text-warm-200 dark:text-warm-700">·</span>
+              <span className="text-divider dark:text-[#2a2822]">&middot;</span>
               <PostViews slug={slug} count />
-              {post.metadata.tags?.map((tag) => (
-                <TagBadge key={tag} tag={tag} />
-              ))}
+              <AdminBar editSlug={slug} deleteSlug={slug} />
             </div>
+            {post.metadata.tags && post.metadata.tags.length > 0 && (
+              <div className="mt-5 flex flex-wrap gap-2">
+                {post.metadata.tags.map((tag) => (
+                  <Link
+                    key={tag}
+                    href={`/?tag=${encodeURIComponent(tag)}`}
+                    className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs bg-frost dark:bg-[#1a1916] text-smoke dark:text-[#6b6560] hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200"
+                  >
+                    {tag}
+                  </Link>
+                ))}
+              </div>
+            )}
           </header>
 
           <div className="prose prose-lg max-w-none">
@@ -74,10 +81,8 @@ export default async function PostPage({
                   const text = String(children);
                   const id = slugify(text);
                   return (
-                    <h2 id={id} className="group" {...props}>
-                      <a href={`#${id}`} className="no-underline hover:no-underline">
-                        {children}
-                      </a>
+                    <h2 id={id} {...props}>
+                      {children}
                     </h2>
                   );
                 },
@@ -85,10 +90,8 @@ export default async function PostPage({
                   const text = String(children);
                   const id = slugify(text);
                   return (
-                    <h3 id={id} className="group" {...props}>
-                      <a href={`#${id}`} className="no-underline hover:no-underline">
-                        {children}
-                      </a>
+                    <h3 id={id} {...props}>
+                      {children}
                     </h3>
                   );
                 },
@@ -99,9 +102,9 @@ export default async function PostPage({
           </div>
         </article>
 
-        {/* 桌面端目录侧栏 */}
+        {/* 桌面端目录 */}
         <aside className="hidden lg:block lg:w-56 lg:shrink-0">
-          <div className="sticky top-24">
+          <div className="sticky top-28">
             <TableOfContents content={post.content} />
           </div>
         </aside>

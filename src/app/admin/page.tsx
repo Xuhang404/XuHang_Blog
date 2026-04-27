@@ -25,45 +25,51 @@ export default function AdminDashboard() {
 
   return (
     <>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-warm-800 dark:text-warm-100">文章</h1>
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="font-serif-heading text-2xl text-ink dark:text-[#f0eee8]">
+          文章
+        </h1>
         <Link
           href="/admin/posts/new"
-          className="rounded-lg bg-accent text-white px-4 py-2 text-sm font-medium hover:bg-accent-dark transition-colors duration-300"
+          className="bg-ink dark:bg-[#f0eee8] text-paper dark:text-[#0f0f0e] px-4 py-2 text-sm hover:bg-vermillion dark:hover:bg-vermillion hover:text-white transition-colors duration-200"
         >
           写新文章
         </Link>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-0">
         {posts.length === 0 && (
-          <p className="text-sm text-warm-400 text-center py-12">暂无文章</p>
+          <p className="text-sm text-smoke dark:text-[#6b6560] text-center py-16">
+            暂无文章
+          </p>
         )}
         {posts.map((post) => (
           <div
             key={post.slug}
-            className="flex items-center justify-between rounded-xl ring-1 ring-warm-200 dark:ring-warm-800 bg-white dark:bg-warm-900 px-4 py-3 transition-shadow duration-300 hover:shadow-sm"
+            className="flex items-center justify-between border-b border-divider dark:border-[#2a2822] last:border-0 px-1 py-4 hover:bg-frost dark:hover:bg-[#1a1916] transition-colors duration-200"
           >
-            <div>
+            <div className="min-w-0">
               <Link
                 href={`/admin/posts/${post.slug}/edit`}
-                className="font-medium text-warm-800 dark:text-warm-100 hover:text-accent transition-colors duration-300"
+                className="text-ink dark:text-[#f0eee8] hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200"
               >
                 {post.metadata.title}
               </Link>
-              <p className="mt-0.5 text-xs text-warm-400">{post.metadata.date}</p>
+              <p className="mt-0.5 text-xs text-smoke/60 dark:text-[#6b6560]/60">
+                {post.metadata.date}
+              </p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-4 shrink-0 ml-4">
               <Link
                 href={`/posts/${post.slug}`}
-                className="text-xs text-warm-400 hover:text-accent transition-colors duration-300"
+                className="text-xs text-smoke/40 dark:text-[#6b6560]/40 hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200"
                 target="_blank"
               >
                 预览
               </Link>
               <button
                 onClick={() => handleDelete(post.slug)}
-                className="text-xs text-rose-400 hover:text-rose-600 transition-colors duration-300"
+                className="text-xs text-smoke/40 dark:text-[#6b6560]/40 hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200"
               >
                 删除
               </button>

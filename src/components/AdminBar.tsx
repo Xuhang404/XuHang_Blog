@@ -28,11 +28,11 @@ export default function AdminBar({ editSlug, deleteSlug }: Props) {
   };
 
   return (
-    <div className="flex gap-1.5">
+    <span className="inline-flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
       {editSlug && (
         <button
           onClick={() => doAction("edit", editSlug)}
-          className="rounded-lg border border-warm-200 dark:border-warm-700 px-2 py-0.5 text-xs text-warm-400 hover:text-accent hover:border-accent dark:hover:border-accent transition-all duration-300"
+          className="text-xs text-smoke/40 hover:text-vermillion transition-colors duration-200"
         >
           编辑
         </button>
@@ -40,11 +40,11 @@ export default function AdminBar({ editSlug, deleteSlug }: Props) {
       {deleteSlug && (
         <button
           onClick={() => doAction("delete", deleteSlug)}
-          className="rounded-lg border border-warm-200 dark:border-warm-700 px-2 py-0.5 text-xs text-warm-400 hover:text-rose-500 hover:border-rose-300 dark:hover:border-rose-700 transition-all duration-300"
+          className="text-xs text-smoke/40 hover:text-vermillion transition-colors duration-200"
         >
           删除
         </button>
       )}
-    </div>
+    </span>
   );
 }

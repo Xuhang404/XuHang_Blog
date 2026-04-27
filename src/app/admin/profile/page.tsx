@@ -34,53 +34,59 @@ export default function AdminProfile() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-warm-800 dark:text-warm-100 mb-8">
+      <h1 className="font-serif-heading text-2xl text-ink dark:text-[#f0eee8] mb-10">
         编辑个人信息
       </h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block text-sm text-warm-500 mb-1">头像 URL</label>
+          <label className="block text-xs text-smoke/60 dark:text-[#6b6560]/60 uppercase tracking-[0.15em] mb-2">
+            头像 URL
+          </label>
           <input
             value={avatar}
             onChange={(e) => setAvatar(e.target.value)}
-            className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
+            className="w-full border border-divider dark:border-[#2a2822] bg-paper dark:bg-[#0f0f0e] px-3 py-2.5 text-sm text-ink dark:text-[#f0eee8] placeholder:text-smoke/40 focus:outline-none focus:border-vermillion transition-colors duration-200"
           />
           {avatar && (
             <img
               src={avatar}
               alt="preview"
-              className="size-12 rounded-full mt-2 ring-2 ring-warm-200 dark:ring-warm-700"
+              className="size-12 mt-3"
             />
           )}
         </div>
         <div>
-          <label className="block text-sm text-warm-500 mb-1">名称</label>
+          <label className="block text-xs text-smoke/60 dark:text-[#6b6560]/60 uppercase tracking-[0.15em] mb-2">
+            名称
+          </label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
+            className="w-full border border-divider dark:border-[#2a2822] bg-paper dark:bg-[#0f0f0e] px-3 py-2.5 text-sm text-ink dark:text-[#f0eee8] placeholder:text-smoke/40 focus:outline-none focus:border-vermillion transition-colors duration-200"
           />
         </div>
         <div>
-          <label className="block text-sm text-warm-500 mb-1">签名</label>
+          <label className="block text-xs text-smoke/60 dark:text-[#6b6560]/60 uppercase tracking-[0.15em] mb-2">
+            签名
+          </label>
           <input
             value={bio}
             onChange={(e) => setBio(e.target.value)}
-            className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
+            className="w-full border border-divider dark:border-[#2a2822] bg-paper dark:bg-[#0f0f0e] px-3 py-2.5 text-sm text-ink dark:text-[#f0eee8] placeholder:text-smoke/40 focus:outline-none focus:border-vermillion transition-colors duration-200"
           />
         </div>
-        <div className="flex gap-3 pt-2">
+        <div className="flex gap-4 pt-4">
           <button
             type="submit"
             disabled={saving}
-            className="rounded-xl bg-accent text-white px-4 py-2 text-sm font-medium hover:bg-accent-dark transition-all duration-300 disabled:opacity-50"
+            className="bg-ink dark:bg-[#f0eee8] text-paper dark:text-[#0f0f0e] px-5 py-2.5 text-sm hover:bg-vermillion dark:hover:bg-vermillion hover:text-white transition-colors duration-200 disabled:opacity-50"
           >
             {saving ? "保存中..." : "保存"}
           </button>
           <button
             type="button"
             onClick={() => router.push("/admin")}
-            className="rounded-xl border border-warm-200 dark:border-warm-700 px-4 py-2 text-sm text-warm-500 dark:text-warm-400 hover:bg-warm-100 dark:hover:bg-warm-800 transition-all duration-300"
+            className="text-sm text-smoke dark:text-[#6b6560] hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200"
           >
             取消
           </button>

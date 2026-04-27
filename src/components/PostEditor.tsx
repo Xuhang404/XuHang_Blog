@@ -82,33 +82,34 @@ export default function PostEditor({
     router.refresh();
   };
 
+  const inputClass =
+    "w-full border border-divider dark:border-[#2a2822] bg-paper dark:bg-[#0f0f0e] px-3 py-2.5 text-sm text-ink dark:text-[#f0eee8] placeholder:text-smoke/40 dark:placeholder:text-[#6b6560]/40 focus:outline-none focus:border-vermillion transition-colors duration-200";
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-5">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-warm-800 dark:text-warm-100">
+        <h1 className="font-serif-heading text-2xl text-ink dark:text-[#f0eee8]">
           {isEditing ? "编辑文章" : "写新文章"}
         </h1>
-        <div className="flex gap-3">
+        <div className="flex gap-4">
           <button
             type="button"
             onClick={() => router.push("/admin")}
-            className="rounded-xl border border-warm-200 dark:border-warm-700 px-4 py-2 text-sm text-warm-500 dark:text-warm-400 hover:bg-warm-100 dark:hover:bg-warm-800 transition-all duration-300"
+            className="text-sm text-smoke dark:text-[#6b6560] hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200"
           >
             取消
           </button>
           <button
             type="submit"
             disabled={saving}
-            className="rounded-xl bg-accent text-white px-4 py-2 text-sm font-medium hover:bg-accent-dark transition-all duration-300 disabled:opacity-50"
+            className="bg-ink dark:bg-[#f0eee8] text-paper dark:text-[#0f0f0e] px-5 py-2.5 text-sm hover:bg-vermillion dark:hover:bg-vermillion hover:text-white transition-colors duration-200 disabled:opacity-50"
           >
             {saving ? "保存中..." : "保存"}
           </button>
         </div>
       </div>
 
-      {error && (
-        <p className="text-sm text-rose-500">{error}</p>
-      )}
+      {error && <p className="text-sm text-vermillion">{error}</p>}
 
       <div className="grid grid-cols-2 gap-4">
         <div>
@@ -119,18 +120,18 @@ export default function PostEditor({
               setSlug(e.target.value);
               setSlugManuallyEdited(true);
             }}
-            className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
+            className={inputClass}
             disabled={isEditing}
           />
-          <p className="mt-1 text-xs text-warm-400">
-            文章访问地址 /posts/{slug || "..."}，由标题自动生成
+          <p className="mt-1 text-xs text-smoke/50 dark:text-[#6b6560]/50">
+            访问地址 /posts/{slug || "..."}
           </p>
         </div>
         <input
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
+          className={inputClass}
           required
         />
       </div>
@@ -139,7 +140,7 @@ export default function PostEditor({
         placeholder="文章标题"
         value={title}
         onChange={(e) => handleTitleChange(e.target.value)}
-        className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
+        className={inputClass}
         required
       />
 
@@ -147,7 +148,7 @@ export default function PostEditor({
         placeholder="标签（用逗号分隔）"
         value={tags}
         onChange={(e) => setTags(e.target.value)}
-        className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
+        className={inputClass}
       />
 
       <textarea
@@ -155,24 +156,28 @@ export default function PostEditor({
         value={excerpt}
         onChange={(e) => setExcerpt(e.target.value)}
         rows={2}
-        className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
+        className={inputClass + " resize-y"}
         required
       />
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs text-warm-500 mb-1">Markdown</label>
+          <label className="block text-xs text-smoke/60 dark:text-[#6b6560]/60 uppercase tracking-[0.15em] mb-2">
+            Markdown
+          </label>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows={20}
-            className="w-full rounded-xl border border-warm-200 dark:border-warm-700 bg-white dark:bg-warm-900 px-3 py-2 font-mono text-sm text-warm-800 dark:text-warm-100 placeholder-warm-400 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-300"
+            className={inputClass + " font-mono text-xs resize-none"}
             required
           />
         </div>
         <div>
-          <label className="block text-xs text-warm-500 mb-1">预览</label>
-          <div className="prose max-w-none rounded-xl border border-warm-200 dark:border-warm-800 bg-white dark:bg-warm-900 px-3 py-2 text-sm overflow-y-auto h-[482px]">
+          <label className="block text-xs text-smoke/60 dark:text-[#6b6560]/60 uppercase tracking-[0.15em] mb-2">
+            预览
+          </label>
+          <div className="prose max-w-none border border-divider dark:border-[#2a2822] bg-paper dark:bg-[#0f0f0e] px-4 py-3 text-sm overflow-y-auto h-[482px]">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {content || "*暂无内容*"}
             </ReactMarkdown>

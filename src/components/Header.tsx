@@ -3,25 +3,25 @@ import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-warm-200 dark:border-warm-800 bg-warm-50/80 dark:bg-warm-950/80 backdrop-blur-md">
-      <div className="mx-auto max-w-6xl flex items-center justify-between px-4 py-5">
+    <header className="sticky top-0 z-50 bg-paper/90 dark:bg-[#0f0f0e]/90 backdrop-blur-sm">
+      <div className="mx-auto max-w-6xl flex items-center justify-between px-4 py-6">
         <Link
           href="/"
-          className="text-lg font-bold tracking-tight text-warm-800 dark:text-warm-100"
+          className="font-serif-heading text-xl text-ink dark:text-[#f0eee8] tracking-tight"
         >
-          XuHang&apos;s Blog
+          XuHang
         </Link>
-        <div className="flex items-center gap-6">
-          <nav className="flex gap-6 text-sm">
+        <div className="flex items-center gap-8">
+          <nav className="flex gap-8 text-sm">
             <Link
               href="/"
-              className="relative text-warm-500 dark:text-warm-400 hover:text-accent dark:hover:text-accent transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
+              className="text-smoke dark:text-[#6b6560] hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200 link-underline"
             >
               首页
             </Link>
             <Link
               href="/about"
-              className="relative text-warm-500 dark:text-warm-400 hover:text-accent dark:hover:text-accent transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
+              className="text-smoke dark:text-[#6b6560] hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200 link-underline"
             >
               关于
             </Link>

@@ -40,20 +40,20 @@ export default function TableOfContents({ content }: { content: string }) {
 
   return (
     <nav className="text-sm">
-      <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-warm-400 dark:text-warm-500">
+      <p className="mb-4 text-[10px] uppercase tracking-[0.15em] text-smoke/60 dark:text-[#6b6560]/60">
         目录
-      </h3>
-      <ul className="space-y-1 border-l-2 border-warm-200 dark:border-warm-800">
+      </p>
+      <ul className="space-y-1.5 border-l border-divider dark:border-[#2a2822]">
         {headings.map((h) => (
           <li key={h.id}>
             <a
               href={`#${h.id}`}
-              className={`block transition-all duration-300 ${
-                h.level === 3 ? "pl-6" : "pl-3"
-              } py-1 text-xs leading-relaxed ${
+              className={`block transition-all duration-200 ${
+                h.level === 3 ? "pl-6" : "pl-4"
+              } py-0.5 text-xs leading-relaxed ${
                 activeId === h.id
-                  ? "text-accent border-l-2 border-accent -ml-[2px] font-medium"
-                  : "text-warm-400 dark:text-warm-500 hover:text-warm-600 dark:hover:text-warm-300"
+                  ? "text-vermillion border-l-2 border-vermillion -ml-[1px] font-medium"
+                  : "text-smoke dark:text-[#6b6560] hover:text-ink dark:hover:text-[#f0eee8]"
               }`}
             >
               {h.text}
