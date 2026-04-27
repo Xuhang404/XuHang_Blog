@@ -20,5 +20,5 @@ export default function PostViews({ slug, count }: Props) {
 
   if (views === null) return null;
 
-  return <span className="text-xs text-smoke/60 dark:text-[#6b6560]/60">{views} 次阅读</span>;
+  return <span className="text-xs text-smoke/60">{views} 次阅读</span>;
 }

@@ -40,11 +40,11 @@ export default async function Home({
         <aside className="lg:w-80 lg:shrink-0">
           <div className="lg:sticky lg:top-28">
             {/* 大号衬线名字 */}
-            <h1 className="font-serif-heading text-[clamp(2.5rem,5vw,4rem)] leading-none text-ink dark:text-[#f0eee8]">
+            <h1 className="font-serif-heading text-[clamp(2.5rem,5vw,4rem)] leading-none text-ink">
               {profile.name}
             </h1>
             {profile.bio && (
-              <p className="mt-4 text-sm text-smoke dark:text-[#6b6560] leading-relaxed max-w-xs">
+              <p className="mt-4 text-sm text-smoke leading-relaxed max-w-xs">
                 {profile.bio}
               </p>
             )}
@@ -55,7 +55,7 @@ export default async function Home({
 
             {/* 标签云 */}
             <div className="mt-12">
-              <p className="text-[10px] uppercase tracking-[0.15em] text-smoke/60 dark:text-[#6b6560]/60 mb-4">
+              <p className="text-[10px] uppercase tracking-[0.15em] text-smoke/60 mb-4">
                 标签
               </p>
               <TagCloud activeTag={tag} />
@@ -64,18 +64,18 @@ export default async function Home({
         </aside>
 
         {/* 竖向分隔 */}
-        <div className="hidden lg:block w-px bg-divider dark:bg-[#2a2822] shrink-0" />
+        <div className="hidden lg:block w-px bg-divider shrink-0" />
 
         {/* 右侧 — 文章列表 */}
         <div className="flex-1 min-w-0 mt-12 lg:mt-0">
           {/* 筛选提示 */}
           {tag && (
-            <div className="mb-10 flex items-center gap-2 text-sm text-smoke dark:text-[#6b6560] animate-fadeIn">
+            <div className="mb-10 flex items-center gap-2 text-sm text-smoke animate-fadeIn">
               <span className="text-vermillion text-base">#</span>
-              <span className="font-medium text-ink dark:text-[#f0eee8]">
+              <span className="font-medium text-ink">
                 {tag}
               </span>
-              <span className="text-divider dark:text-[#2a2822]">/</span>
+              <span className="text-divider">/</span>
               <span>{posts.length} 篇</span>
               <Link
                 href="/"
@@ -89,12 +89,12 @@ export default async function Home({
           {posts.length === 0 ? (
             <div className="py-24 text-center animate-fadeInUp">
               {tag ? (
-                <p className="text-sm text-smoke dark:text-[#6b6560]">
+                <p className="text-sm text-smoke">
                   没有标签为 &ldquo;{tag}&rdquo; 的文章
                 </p>
               ) : (
                 <div>
-                  <p className="text-sm text-smoke dark:text-[#6b6560] mb-6">
+                  <p className="text-sm text-smoke mb-6">
                     还没有文章
                   </p>
                   <AdminButton href="/admin/posts/new" label="写第一篇文章" />
@@ -106,23 +106,23 @@ export default async function Home({
               {posts.map((post, i) => (
                 <article
                   key={post.slug}
-                  className="group border-b border-divider dark:border-[#2a2822] last:border-0 animate-fadeInUp"
+                  className="group border-b border-divider last:border-0 animate-fadeInUp"
                   style={{ animationDelay: `${i * 0.1}s` }}
                 >
                   <Link
                     href={`/posts/${post.slug}`}
-                    className="block py-6 -mx-2 px-2 rounded-sm transition-colors duration-200 hover:bg-frost dark:hover:bg-[#1a1916]"
+                    className="block py-6 -mx-2 px-2 rounded-sm transition-all duration-300 hover:bg-frost hover:translate-x-1"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="min-w-0">
-                        <h2 className="font-serif-heading text-lg text-ink dark:text-[#f0eee8] group-hover:text-vermillion dark:group-hover:text-vermillion-light transition-colors duration-200">
+                        <h2 className="font-serif-heading text-lg text-ink group-hover:text-vermillion dark:group-hover:text-vermillion-light transition-colors duration-200">
                           {post.metadata.title}
                         </h2>
-                        <p className="mt-1.5 text-sm text-smoke dark:text-[#6b6560] leading-relaxed line-clamp-1">
+                        <p className="mt-1.5 text-sm text-smoke leading-relaxed line-clamp-1">
                           {post.metadata.excerpt}
                         </p>
                       </div>
-                      <div className="shrink-0 flex items-center gap-4 text-xs text-smoke/60 dark:text-[#6b6560]/60 pt-1">
+                      <div className="shrink-0 flex items-center gap-4 text-xs text-smoke/60 pt-1">
                         <time>{relativeTime(post.metadata.date)}</time>
                         <PostViews slug={post.slug} />
                         <AdminBar editSlug={post.slug} deleteSlug={post.slug} />

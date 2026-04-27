@@ -21,8 +21,8 @@ export default function TagCloud({ activeTag }: { activeTag?: string }) {
         href="/"
         className={`rounded-full px-2.5 py-1 text-[11px] transition-all duration-200 ${
           !activeTag
-            ? "bg-ink dark:bg-[#f0eee8] text-paper dark:text-[#0f0f0e]"
-            : "text-smoke dark:text-[#6b6560] hover:text-vermillion dark:hover:text-vermillion-light hover:bg-frost dark:hover:bg-[#1a1916]"
+            ? "bg-ink text-paper"
+            : "text-smoke hover:text-vermillion dark:hover:text-vermillion-light hover:bg-frost"
         }`}
       >
         全部
@@ -43,7 +43,7 @@ export default function TagCloud({ activeTag }: { activeTag?: string }) {
             className={`${size} rounded-full px-2.5 py-1 transition-all duration-200 ${
               active
                 ? "bg-vermillion text-white"
-                : "text-smoke dark:text-[#6b6560] hover:text-vermillion dark:hover:text-vermillion-light hover:bg-frost dark:hover:bg-[#1a1916]"
+                : "text-smoke hover:text-vermillion dark:hover:text-vermillion-light hover:bg-frost"
             }`}
           >
             {tag}

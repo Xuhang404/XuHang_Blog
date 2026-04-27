@@ -22,7 +22,7 @@ export default function AdminButton({ href, label }: Props) {
   return (
     <button
       onClick={handleClick}
-      className="text-xs text-smoke/50 dark:text-[#6b6560]/50 hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200"
+      className="text-xs text-smoke/50 hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200"
     >
       {label}
     </button>

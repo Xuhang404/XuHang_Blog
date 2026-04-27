@@ -40,10 +40,10 @@ export default function TableOfContents({ content }: { content: string }) {
 
   return (
     <nav className="text-sm">
-      <p className="mb-4 text-[10px] uppercase tracking-[0.15em] text-smoke/60 dark:text-[#6b6560]/60">
+      <p className="mb-4 text-[10px] uppercase tracking-[0.15em] text-smoke/60">
         目录
       </p>
-      <ul className="space-y-1.5 border-l border-divider dark:border-[#2a2822]">
+      <ul className="space-y-1.5 border-l border-divider">
         {headings.map((h) => (
           <li key={h.id}>
             <a
@@ -53,7 +53,7 @@ export default function TableOfContents({ content }: { content: string }) {
               } py-0.5 text-xs leading-relaxed ${
                 activeId === h.id
                   ? "text-vermillion border-l-2 border-vermillion -ml-[1px] font-medium"
-                  : "text-smoke dark:text-[#6b6560] hover:text-ink dark:hover:text-[#f0eee8]"
+                  : "text-smoke hover:text-ink"
               }`}
             >
               {h.text}

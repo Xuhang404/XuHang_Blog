@@ -29,7 +29,7 @@ function LoginForm() {
 
   return (
     <div className="mx-auto max-w-sm px-4 py-32">
-      <h1 className="font-serif-heading text-2xl text-ink dark:text-[#f0eee8] text-center mb-8">
+      <h1 className="font-serif-heading text-2xl text-ink text-center mb-8">
         管理员登录
       </h1>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -38,13 +38,13 @@ function LoginForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="请输入密码"
-          className="w-full border border-divider dark:border-[#2a2822] bg-paper dark:bg-[#0f0f0e] px-4 py-3 text-sm text-ink dark:text-[#f0eee8] placeholder:text-smoke/40 dark:placeholder:text-[#6b6560]/40 focus:outline-none focus:border-vermillion transition-colors duration-200"
+          className="w-full border border-divider bg-paper px-4 py-3 text-sm text-ink placeholder:text-smoke/40 focus:outline-none focus:border-vermillion transition-colors duration-200"
           autoFocus
         />
         {error && <p className="text-sm text-vermillion">{error}</p>}
         <button
           type="submit"
-          className="w-full bg-ink dark:bg-[#f0eee8] text-paper dark:text-[#0f0f0e] py-3 text-sm hover:bg-vermillion dark:hover:bg-vermillion hover:text-white transition-colors duration-200"
+          className="w-full bg-ink text-paper py-3 text-sm hover:bg-vermillion dark:hover:bg-vermillion hover:text-white transition-colors duration-200"
         >
           登录
         </button>

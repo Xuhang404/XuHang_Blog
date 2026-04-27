@@ -22,14 +22,6 @@
   --color-ink-light: #2c2c2c;
   --color-ink: #111110;
 
-  /* 暗色模式对应 */
-  --color-paper-dark: #0f0f0e;
-  --color-frost-dark: #1a1916;
-  --color-divider-dark: #2a2822;
-  --color-smoke-dark: #6b6560;
-  --color-ink-light-dark: #a8a59a;
-  --color-ink-dark: #f0eee8;
-
   /* 朱砂点缀 */
   --color-vermillion: #c41e3a;
   --color-vermillion-light: #e0576e;
@@ -44,6 +36,16 @@ html {
 body {
   text-wrap: pretty;
   letter-spacing: 0.01em;
+}
+
+/* 暗色模式下全局颜色重映射 */
+.dark {
+  --color-paper: #0f0f0e;
+  --color-frost: #1a1916;
+  --color-divider: #2a2822;
+  --color-smoke: #6b6560;
+  --color-ink-light: #a8a59a;
+  --color-ink: #f0eee8;
 }
 
 /* 隐藏 Next.js 开发者面板 */

@@ -23,7 +23,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggle}
-      className="relative flex items-center justify-center size-8 text-smoke dark:text-[#6b6560] hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200"
+      className="relative flex items-center justify-center size-8 text-smoke hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200"
       aria-label={dark ? "切换到亮色模式" : "切换到暗色模式"}
     >
       {dark ? (

@@ -8,11 +8,11 @@ export default function AboutPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-20">
       {/* 名字 — 大号衬线 */}
-      <h1 className="font-serif-heading text-[clamp(2.5rem,6vw,4.5rem)] leading-none text-ink dark:text-[#f0eee8]">
+      <h1 className="font-serif-heading text-[clamp(2.5rem,6vw,4.5rem)] leading-none text-ink">
         {profile.name}
       </h1>
       {profile.bio && (
-        <p className="mt-4 text-lg text-smoke dark:text-[#6b6560]">
+        <p className="mt-4 text-lg text-smoke">
           {profile.bio}
         </p>
       )}
@@ -21,11 +21,11 @@ export default function AboutPage() {
         {/* 简介 */}
         {about.intro && (
           <section>
-            <p className="text-base text-ink-light dark:text-[#a8a59a] leading-relaxed">
+            <p className="text-base text-ink-light leading-relaxed">
               {about.intro}
             </p>
             {about.introMore && (
-              <p className="mt-4 text-base text-ink-light dark:text-[#a8a59a] leading-relaxed">
+              <p className="mt-4 text-base text-ink-light leading-relaxed">
                 {about.introMore}
               </p>
             )}
@@ -35,14 +35,14 @@ export default function AboutPage() {
         {/* 技能 */}
         {about.skills && about.skills.length > 0 && (
           <section>
-            <p className="text-[10px] uppercase tracking-[0.15em] text-smoke/60 dark:text-[#6b6560]/60 mb-4">
+            <p className="text-[10px] uppercase tracking-[0.15em] text-smoke/60 mb-4">
               技能
             </p>
             <div className="flex flex-wrap gap-2">
               {about.skills.map((skill) => (
                 <span
                   key={skill}
-                  className="inline-flex items-center rounded-full px-3 py-1 text-sm bg-frost dark:bg-[#1a1916] text-smoke dark:text-[#6b6560]"
+                  className="inline-flex items-center rounded-full px-3 py-1 text-sm bg-frost text-smoke"
                 >
                   {skill}
                 </span>
@@ -54,7 +54,7 @@ export default function AboutPage() {
         {/* GitHub */}
         {about.github && (
           <section>
-            <p className="text-[10px] uppercase tracking-[0.15em] text-smoke/60 dark:text-[#6b6560]/60 mb-4">
+            <p className="text-[10px] uppercase tracking-[0.15em] text-smoke/60 mb-4">
               联系
             </p>
             <a

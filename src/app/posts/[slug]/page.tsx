@@ -41,20 +41,20 @@ export default async function PostPage({
         <article className="min-w-0 flex-1 max-w-3xl">
           <Link
             href="/"
-            className="inline-block text-sm text-smoke/60 dark:text-[#6b6560]/60 hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200 mb-10"
+            className="inline-block text-sm text-smoke/60 hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200 mb-10"
           >
             &larr; 返回首页
           </Link>
 
           <header className="mb-12">
-            <h1 className="font-serif-heading text-[clamp(2rem,4vw,3rem)] leading-tight text-ink dark:text-[#f0eee8]">
+            <h1 className="font-serif-heading text-[clamp(2rem,4vw,3rem)] leading-tight text-ink">
               {post.metadata.title}
             </h1>
-            <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-smoke dark:text-[#6b6560]">
+            <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-smoke">
               <time>{post.metadata.date}</time>
-              <span className="text-divider dark:text-[#2a2822]">&middot;</span>
+              <span className="text-divider">&middot;</span>
               <span>{readingTime > 1 ? `${readingTime} 分钟阅读` : "不到 1 分钟"}</span>
-              <span className="text-divider dark:text-[#2a2822]">&middot;</span>
+              <span className="text-divider">&middot;</span>
               <PostViews slug={slug} count />
               <AdminBar editSlug={slug} deleteSlug={slug} />
             </div>
@@ -64,7 +64,7 @@ export default async function PostPage({
                   <Link
                     key={tag}
                     href={`/?tag=${encodeURIComponent(tag)}`}
-                    className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs bg-frost dark:bg-[#1a1916] text-smoke dark:text-[#6b6560] hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200"
+                    className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs bg-frost text-smoke hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200"
                   >
                     {tag}
                   </Link>

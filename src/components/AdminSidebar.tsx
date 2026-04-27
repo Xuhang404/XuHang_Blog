@@ -26,8 +26,8 @@ export default function AdminSidebar() {
             href={link.href}
             className={`block px-3 py-2 text-sm transition-all duration-200 ${
               active
-                ? "bg-ink dark:bg-[#f0eee8] text-paper dark:text-[#0f0f0e] font-medium"
-                : "text-smoke dark:text-[#6b6560] hover:text-ink dark:hover:text-[#f0eee8] hover:bg-frost dark:hover:bg-[#1a1916]"
+                ? "bg-ink text-paper font-medium"
+                : "text-smoke hover:text-ink hover:bg-frost"
             }`}
           >
             {link.label}

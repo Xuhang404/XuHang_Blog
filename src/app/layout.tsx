@@ -29,7 +29,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="flex min-h-full flex-col bg-paper dark:bg-[#0f0f0e] text-ink-light dark:text-[#a8a59a]">
+      <body className="flex min-h-full flex-col bg-paper text-ink-light">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

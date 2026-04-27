@@ -83,26 +83,26 @@ export default function PostEditor({
   };
 
   const inputClass =
-    "w-full border border-divider dark:border-[#2a2822] bg-paper dark:bg-[#0f0f0e] px-3 py-2.5 text-sm text-ink dark:text-[#f0eee8] placeholder:text-smoke/40 dark:placeholder:text-[#6b6560]/40 focus:outline-none focus:border-vermillion transition-colors duration-200";
+    "w-full border border-divider bg-paper px-3 py-2.5 text-sm text-ink placeholder:text-smoke/40 focus:outline-none focus:border-vermillion transition-colors duration-200";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="flex items-center justify-between">
-        <h1 className="font-serif-heading text-2xl text-ink dark:text-[#f0eee8]">
+        <h1 className="font-serif-heading text-2xl text-ink">
           {isEditing ? "编辑文章" : "写新文章"}
         </h1>
         <div className="flex gap-4">
           <button
             type="button"
             onClick={() => router.push("/admin")}
-            className="text-sm text-smoke dark:text-[#6b6560] hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200"
+            className="text-sm text-smoke hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200"
           >
             取消
           </button>
           <button
             type="submit"
             disabled={saving}
-            className="bg-ink dark:bg-[#f0eee8] text-paper dark:text-[#0f0f0e] px-5 py-2.5 text-sm hover:bg-vermillion dark:hover:bg-vermillion hover:text-white transition-colors duration-200 disabled:opacity-50"
+            className="bg-ink text-paper px-5 py-2.5 text-sm hover:bg-vermillion dark:hover:bg-vermillion hover:text-white transition-colors duration-200 disabled:opacity-50"
           >
             {saving ? "保存中..." : "保存"}
           </button>
@@ -123,7 +123,7 @@ export default function PostEditor({
             className={inputClass}
             disabled={isEditing}
           />
-          <p className="mt-1 text-xs text-smoke/50 dark:text-[#6b6560]/50">
+          <p className="mt-1 text-xs text-smoke/50">
             访问地址 /posts/{slug || "..."}
           </p>
         </div>
@@ -162,7 +162,7 @@ export default function PostEditor({
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs text-smoke/60 dark:text-[#6b6560]/60 uppercase tracking-[0.15em] mb-2">
+          <label className="block text-xs text-smoke/60 uppercase tracking-[0.15em] mb-2">
             Markdown
           </label>
           <textarea
@@ -174,10 +174,10 @@ export default function PostEditor({
           />
         </div>
         <div>
-          <label className="block text-xs text-smoke/60 dark:text-[#6b6560]/60 uppercase tracking-[0.15em] mb-2">
+          <label className="block text-xs text-smoke/60 uppercase tracking-[0.15em] mb-2">
             预览
           </label>
-          <div className="prose max-w-none border border-divider dark:border-[#2a2822] bg-paper dark:bg-[#0f0f0e] px-4 py-3 text-sm overflow-y-auto h-[482px]">
+          <div className="prose max-w-none border border-divider bg-paper px-4 py-3 text-sm overflow-y-auto h-[482px]">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {content || "*暂无内容*"}
             </ReactMarkdown>
