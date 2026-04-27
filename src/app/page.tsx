@@ -20,15 +20,21 @@ export default async function Home({
     : allPosts;
 
   function relativeTime(dateStr: string): string {
-    const diff = Date.now() - new Date(dateStr).getTime();
-    const min = Math.floor(diff / 60000);
-    if (min < 1) return "刚刚";
-    if (min < 60) return `${min} 分钟前`;
-    const hour = Math.floor(diff / 3600000);
-    if (hour < 24) return `${hour} 小时前`;
-    const day = Math.floor(diff / 86400000);
-    if (day < 30) return `${day} 天前`;
-    const month = Math.floor(day / 30);
+    const [y, m, d] = dateStr.split("-").map(Number);
+
+    // 当前北京时间 (UTC+8) 的午夜
+    const now = new Date(Date.now() + 8 * 3600000);
+    const todayStart = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+
+    // 发布日期（视为北京时间）
+    const pubStart = Date.UTC(y, m - 1, d) - 8 * 3600000;
+
+    const diffDays = Math.floor((todayStart - pubStart) / 86400000);
+
+    if (diffDays === 0) return "今天";
+    if (diffDays === 1) return "昨天";
+    if (diffDays < 30) return `${diffDays} 天前`;
+    const month = Math.floor(diffDays / 30);
     if (month < 12) return `${month} 个月前`;
     return `${Math.floor(month / 12)} 年前`;
   }
