@@ -24,6 +24,16 @@ export default function RootLayout({
                 if (theme === 'light' || (!theme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
                   document.documentElement.classList.remove('dark');
                 }
+                window.addEventListener('pageshow', function(e) {
+                  if (e.persisted) {
+                    var t = localStorage.getItem('theme');
+                    if (t === 'light' || (!t && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+                      document.documentElement.classList.remove('dark');
+                    } else {
+                      document.documentElement.classList.add('dark');
+                    }
+                  }
+                });
               })();
             `,
           }}

@@ -10,7 +10,10 @@ type Props = {
 export default function AdminBar({ editSlug, deleteSlug }: Props) {
   const router = useRouter();
 
-  const doAction = async (action: string, slug: string) => {
+  const doAction = async (action: string, slug: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     if (action === "delete" && !confirm("确定删除？")) return;
 
     const res = await fetch("/api/auth/check");
@@ -31,7 +34,7 @@ export default function AdminBar({ editSlug, deleteSlug }: Props) {
     <span className="inline-flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
       {editSlug && (
         <button
-          onClick={() => doAction("edit", editSlug)}
+          onClick={(e) => doAction("edit", editSlug, e)}
           className="text-xs text-smoke/40 hover:text-vermillion transition-colors duration-200"
         >
           编辑
@@ -39,7 +42,7 @@ export default function AdminBar({ editSlug, deleteSlug }: Props) {
       )}
       {deleteSlug && (
         <button
-          onClick={() => doAction("delete", deleteSlug)}
+          onClick={(e) => doAction("delete", deleteSlug, e)}
           className="text-xs text-smoke/40 hover:text-vermillion transition-colors duration-200"
         >
           删除
