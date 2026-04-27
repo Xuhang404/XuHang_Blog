@@ -36,6 +36,22 @@ html {
 body {
   text-wrap: pretty;
   letter-spacing: 0.01em;
+  font-size: clamp(15px, 0.9375rem + 0.15vw, 17px);
+  line-height: 1.75;
+}
+
+/* 暗色模式下页面顶部微微的纹理 */
+.dark body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(255, 255, 255, 0.015) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* 暗色模式下全局颜色重映射 */
@@ -210,6 +226,17 @@ html.color-transition *::after {
   }
 }
 
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes softPulse {
   0%,
   100% {
@@ -231,6 +258,10 @@ html.color-transition *::after {
 .animate-revealHorizontal {
   animation: revealHorizontal 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   transform-origin: left;
+}
+
+.animate-slideDown {
+  animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* ===== 链接下划线 — 从中心展开 ===== */

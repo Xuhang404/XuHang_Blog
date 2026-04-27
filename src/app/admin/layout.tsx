@@ -10,7 +10,7 @@ export default function AdminLayout({
   return (
     <div className="min-h-screen bg-paper">
       <header className="border-b border-divider">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
           <Link
             href="/"
             className="text-sm text-smoke/60 hover:text-vermillion dark:hover:text-vermillion-light transition-colors duration-200"
@@ -25,7 +25,7 @@ export default function AdminLayout({
           </div>
         </div>
       </header>
-      <div className="mx-auto flex max-w-5xl gap-10 px-4 py-10">
+      <div className="mx-auto flex max-w-6xl gap-8 px-4 py-10">
         <AdminSidebar />
         <main className="min-w-0 flex-1">{children}</main>
       </div>
