@@ -3,16 +3,19 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ===== 墨韵 Ink Rhythm — 设计令牌 ===== */
-@theme inline {
-  /* 衬线标题栈 — 思源宋体优先，系统宋体回退 */
-  --font-serif: "Noto Serif SC", "Source Han Serif SC", "STSong", "Songti SC",
-    "SimSun", serif;
-  /* 无衬线正文栈 */
-  --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
-  --font-mono: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", Menlo,
-    Monaco, "Courier New", monospace;
+@theme {
+  /* 衬线标题栈 — 用于中文大标题和感性文字 */
+  --font-serif: "Noto Serif SC", "Source Han Serif SC", "STSong",
+    "Songti SC", "SimSun", "NSimSun", serif;
+
+  /* 无衬线正文栈 — 西文优先，Mac 字体优先于 Windows，中文兜底 */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    Arial, sans-serif;
+
+  /* 等宽栈 — JetBrains Mono 首推（mutoo.im 文章推荐），Fira Code 备选 */
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code",
+    "SF Mono", Consolas, "Sarasa Mono SC", "Courier New", monospace;
 
   /* 墨色系 — 纸白到浓墨 */
   --color-paper: #fafaf7;
@@ -31,31 +34,19 @@
 /* ===== 基础层 ===== */
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   text-wrap: pretty;
-  letter-spacing: 0.01em;
-  font-size: clamp(15px, 0.9375rem + 0.15vw, 17px);
-  line-height: 1.75;
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: 0.015em;
 }
 
-/* 暗色模式下页面顶部微微的纹理 */
-.dark body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: radial-gradient(
-    ellipse at 50% 0%,
-    rgba(255, 255, 255, 0.015) 0%,
-    transparent 60%
-  );
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* 暗色模式下全局颜色重映射 */
-.dark {
+/* 暗色模式下全局颜色重映射 — html.dark 特异性高于 :root */
+html.dark {
   --color-paper: #0f0f0e;
   --color-frost: #1a1916;
   --color-divider: #2a2822;
@@ -73,7 +64,7 @@ nextjs-portal {
 .font-serif-heading {
   font-family: var(--font-serif);
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
 }
 
 /* ===== 墨韵 Prose 排版 ===== */
@@ -93,31 +84,37 @@ nextjs-portal {
   --tw-prose-pre-code: #f0eee8;
   --tw-prose-th-borders: #e8e5df;
   --tw-prose-td-borders: #e8e5df;
+
   font-family: var(--font-sans);
-  font-size: clamp(0.9375rem, 0.875rem + 0.25vw, 1.0625rem);
-  line-height: 1.85;
-  letter-spacing: 0.01em;
+  font-size: 16px;
+  line-height: 1.75;
+  letter-spacing: 0.015em;
 }
 
+/* 文章内标题用衬线 */
 .prose h1,
 .prose h2,
 .prose h3,
 .prose h4 {
   font-family: var(--font-serif);
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
 }
 
 .prose h2 {
-  font-size: clamp(1.5rem, 1.25rem + 0.8vw, 2rem);
+  font-size: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem);
   margin-top: 2.5em;
-  margin-bottom: 0.6em;
+  margin-bottom: 0.5em;
 }
 
 .prose h3 {
-  font-size: clamp(1.15rem, 1rem + 0.5vw, 1.35rem);
-  margin-top: 2em;
-  margin-bottom: 0.5em;
+  font-size: clamp(1.125rem, 1rem + 0.4vw, 1.3rem);
+  margin-top: 1.8em;
+  margin-bottom: 0.4em;
+}
+
+.prose p {
+  margin-bottom: 1em;
 }
 
 .prose a {
@@ -142,11 +139,13 @@ nextjs-portal {
   font-size: 0.875em;
   padding: 0.15em 0.4em;
   border-radius: 3px;
+  font-family: var(--font-mono);
 }
 
 .prose pre {
   border-radius: 6px;
   font-size: 0.875em;
+  font-family: var(--font-mono);
 }
 
 .prose img {
@@ -187,7 +186,7 @@ nextjs-portal {
   background: #2a2822;
 }
 
-/* ===== 主题过渡 ===== */
+/* ===== 主题切换过渡 ===== */
 html.color-transition,
 html.color-transition *,
 html.color-transition *::before,
@@ -209,21 +208,13 @@ html.color-transition *::after {
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @keyframes revealHorizontal {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
 
 @keyframes slideDown {
@@ -234,16 +225,6 @@ html.color-transition *::after {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes softPulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
   }
 }
 
