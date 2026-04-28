@@ -59,15 +59,6 @@ npm run lint    # 代码检查
 ADMIN_PASSWORD=你的密码
 ```
 
-### 部署到 Vercel
-
-1. 推送代码到 GitHub 仓库
-2. 在 [vercel.com](https://vercel.com) 导入仓库
-3. 添加环境变量 `ADMIN_PASSWORD`
-4. 部署完成
-
-> `data/views.json` 在 Vercel Serverless 环境无法持久化写入，如需持久化阅读统计需改用 Vercel KV。
-
 ### 部署到云服务器
 
 ```bash
